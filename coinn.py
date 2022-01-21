@@ -1,25 +1,75 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Created on Thu Jun 10 06:52:51 2021
+Part of the paper:
+Correlated-informed neural networks: a new machine learning framework to predict
+pressure drop in micro-channels
+
+<https://arxiv.org/pdf/2201.07835.pdf>
 
 @author: alejomonbar
 """
 import numpy as np
 
 def mapminmax_apply(x, x_norm):
+    """
+    Normalization frunction of the ANN input
+
+    Parameters
+    ----------
+    x : np.array
+        input variables.
+    x_norm : Dict
+        xoffset - gain - ymin
+
+    Returns
+    -------
+    xn : np.array
+        Normalized input.
+
+    """
     xn = x - x_norm["xoffset"];
     xn *= x_norm["gain"];
     xn += x_norm["ymin"];
     return xn
 
 def mapminmax_reverse(y, y_norm):
+    """
+    Normalization frunction of the ANN output
+
+    Parameters
+    ----------
+    y : np.array
+        output variable.
+    y_norm : Dict
+        xoffset - gain - ymin
+
+    Returns
+    -------
+    yn : np.array
+        Normalized output.
+
+    """
     yn = y - y_norm["ymin"];
     yn /= y_norm["gain"];
     yn += y_norm["xoffset"];
     return yn
 
 def tansig(x):
+    """
+    Tanh function as the activation function of the ANN
+
+    Parameters
+    ----------
+    x : TYPE
+        DESCRIPTION.
+
+    Returns
+    -------
+    TYPE
+        DESCRIPTION.
+
+    """
     return 2 / (1 + np.exp(-2 * x)) - 1
 
 def net(x, params):
