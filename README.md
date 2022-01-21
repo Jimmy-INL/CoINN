@@ -4,3 +4,5 @@ Accurate pressure drop estimation in forced boiling phenomena is important durin
 
 
 <img src="./Images/Fig1.png" width="1000">
+
+CoINN architecture components (left) it is the transfer learning component, the Sun & Mishima correlation, combined with the quality x and the inner diameter ID are the inputs of the ANN; (right) it comprises an input scaling layer, a hidden layer with 6 neurons, and tanh as activation function and an output scaling layer.
